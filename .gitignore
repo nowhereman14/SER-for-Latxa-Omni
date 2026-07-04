@@ -1,0 +1,20 @@
+# Ignore data folder
+data/
+models/Latxa-Omni/
+models/LLaMA-Omni/
+# Ignore heavy files related to the models loaded
+**/Latxa-3.1-8B-Omni/
+*.pt
+*.pth
+
+.ipynb_checkpoints/
+*.safetensors
+*.bin
+*.npy
+*.log
+
+README.md
+__pycache__/
+*.pyc
+*.pyo
+*.egg-info/
