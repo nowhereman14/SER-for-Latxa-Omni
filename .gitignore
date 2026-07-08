@@ -15,6 +15,7 @@ models/LLaMA-Omni/
 
 README.md
 __pycache__/
+*.jsonl
 *.pyc
 *.pyo
 *.egg-info/
