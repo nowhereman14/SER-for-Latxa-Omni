@@ -1,7 +1,6 @@
 import re
 import os
 import json
-from system_prompt import load_prompt
 
 def parse_gaitu(folder_path, file_name):
     speaker = folder_path.rstrip('/').split('/')[-2].replace('_emocional', '')
@@ -84,7 +83,7 @@ def build_entries(folder_path):
         if emotion is None:
             continue
         full_path = os.path.join(folder_path, file_name)
-        entries.append({"instruction": load_prompt(),"input": full_path, "output": emotion, "speaker": speaker})
+        entries.append({"input": full_path, "output": emotion, "speaker": speaker})
     return entries
 
 TRAIN_SPEAKERS = {"karolina", "pello2004", "jaione", "kepa", "Antton"}

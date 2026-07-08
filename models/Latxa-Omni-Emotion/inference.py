@@ -37,10 +37,10 @@ conv = conv_templates[conv_mode].copy()
 conv.system = qs
 
 conv.append_message(conv.roles[0], f"<speech>")
-conv.append_message(conv.roles[1], "angry")
+conv.append_message(conv.roles[1], "haserrea")
 
 conv.append_message(conv.roles[0], "<speech>")
-conv.append_message(conv.roles[1], "sad")
+conv.append_message(conv.roles[1], "tristura")
 
 conv.append_message(conv.roles[0], "<speech>")
 conv.append_message(conv.roles[1], None)
