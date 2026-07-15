@@ -7,7 +7,7 @@ from torch.utils.data import Dataset
 from torch.nn.utils.rnn import pad_sequence
 from transformers import TrainingArguments, EarlyStoppingCallback
 from transformers import Trainer
-from peft import LoraConfig, get_peft_model, prepare_model_for_kbit_training
+from peft import LoraConfig, get_peft_model
 import whisper
 from system_prompt import load_prompt
 from omni_speech.conversation import conv_templates, SeparatorStyle
