@@ -20,18 +20,18 @@ def parse_ttsdb(folder_path, _file_name):
     return speaker, emotion
 
 TAG_MAP = {
-            'angry': 'haserrea',
-            'happy': 'poza',
-            'disgusted': 'nazka',
-            'sad': 'tristura',
-            'scared': 'beldurra',
-            'surprised': 'harridura',
-            'neutral': 'neutroa',
-            'HAR': 'harridura',
-            'HAS': 'haserrea',
-            'POZ': 'poza',
-            'TRI': 'tristura',
-            'NEU': 'neutroa'
+            'angry': 'has',
+            'happy': 'poz',
+            'disgusted': 'naz',
+            'sad': 'tri',
+            'scared': 'bel',
+            'surprised': 'har',
+            'neutral': 'las',
+            'HAR': 'har',
+            'HAS': 'has',
+            'POZ': 'poz',
+            'TRI': 'tri',
+            'NEU': 'las'
 }
 
 def get_tag(emotion):
@@ -134,6 +134,6 @@ if __name__ == "__main__":
     for split in ["train", "val", "test"]:
         count = sum(1 for i in all_entries if i["split"] == split)
         print(f"  {split}: {count}")
-        for emotion in ["haserrea", "poza", "nazka", "tristura", "beldurra", "harridura", "neutroa"]:
+        for emotion in ["has", "poz", "naz", "tri", "bel", "har", "las"]:
             emo_count = sum(1 for e in all_entries if e["split"] == split and e["output"] == emotion)
             print(      f"{emotion}: {emo_count}")

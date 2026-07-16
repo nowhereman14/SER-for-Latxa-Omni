@@ -4,9 +4,9 @@
 #SBATCH --partition=hitz-exclusive
 #SBATCH --qos=hitz-exclusive
 #SBATCH --gres=gpu:1
-#SBATCH --cpus-per-gpu=2 # Number of CPU cores (2 is reasonable)
-#SBATCH --mem-per-gpu=16GB # RAM memory needed (8-16GB)
-#SBATCH --time=3-00:00
+#SBATCH --cpus-per-gpu=4 # Number of CPU cores
+#SBATCH --mem-per-gpu=32GB # RAM memory needed
+#SBATCH --time=24git:00:00
 #SBATCH --output=/scratch/agarciam/instruct_%j.out
 #SBATCH --error=/scratch/agarciam/instruct_%j.err
 

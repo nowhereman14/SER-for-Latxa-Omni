@@ -81,8 +81,8 @@ def collate_fn(batch):
 def apply_lora(model, rank):
     config = LoraConfig(
         r = rank,
-        lora_alpha=rank,
-        target_modules=["q_proj", "k_proj", "v_proj", "o_proj"],
+        lora_alpha=64,
+        target_modules=["q_proj", "k_proj", "v_proj", "o_proj", "gate_proj", "up_proj", "down_proj"],
         task_type="CAUSAL_LM"
     )
     model = get_peft_model(model, config)
@@ -103,7 +103,7 @@ def fine_tuning(args):
     print(tokenizer.eos_token, tokenizer.eos_token_id)
     print(tokenizer.pad_token, tokenizer.pad_token_id)
 
-    model = apply_lora(model, rank = 8)
+    model = apply_lora(model, rank = 32)
     manifest = load_manifest(args.manifest_path)
     train_entries = [e for e in manifest if e["split"] == "train"]
     val_entries = [e for e in manifest if e["split"] == "val"]
