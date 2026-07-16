@@ -1,5 +1,6 @@
 import json
 import argparse
+import time
 import torch
 import whisper
 from sklearn.metrics import classification_report, confusion_matrix
@@ -46,6 +47,8 @@ def prediction(entry, tokenizer, model, conv_mode, mel_size, device):
     return prediction
 
 def evaluation(args):
+    print('Creating model...', flush=True)
+    t0 = time.time()
     device = 'cuda' if torch.cuda.is_available() else 'cpu'
     tokenizer, model, context_len = create_model(
         model_path= args.model_path,
@@ -53,7 +56,11 @@ def evaluation(args):
         is_lora= True,
         s2s= args.s2s,
         device= device)
+    print("¿CUDA available?:", torch.cuda.is_available(), flush=True)
+    print("Current device:", torch.cuda.current_device(), flush=True)
+    print("GPU name:", torch.cuda.get_device_name(0), flush=True)
     model = model.to(device=device, dtype=torch.bfloat16)
+    print(f"Model already moved to GPU succesfully in {time.time()-t0:.1f}s!", flush=True)
     model.eval()
     
     manifest = load_manifest(args.manifest_path)
@@ -67,7 +74,7 @@ def evaluation(args):
         y_pred.append(pred)
         speakers.append(entry["speaker"])
         if i % 100 == 0:
-            print(f"Procesados {i}/{len(test_entries)}")
+            print(f"Processed {i}/{len(test_entries)}")
 
     results = {"y_true": y_true, "y_pred": y_pred, "speakers": speakers}
     with open("test_predictions.json", "w", encoding="utf-8") as f:

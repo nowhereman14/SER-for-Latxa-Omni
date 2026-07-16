@@ -4,8 +4,8 @@
 #SBATCH --partition=hitz-exclusive
 #SBATCH --qos=hitz-exclusive
 #SBATCH --gres=gpu:1
-#SBATCH --cpus-per-gpu=2 # Number of CPU cores
-#SBATCH --mem-per-gpu=16GB # RAM memory needed (8-16GB)
+#SBATCH --cpus-per-gpu=4 # Number of CPU cores
+#SBATCH --mem-per-gpu=128GB
 #SBATCH --time=3-00:00
 #SBATCH --output=/scratch/agarciam/eval_%j.out
 #SBATCH --error=/scratch/agarciam/eval_%j.err
@@ -15,10 +15,7 @@ export PATH="/home/agarciam/.conda/envs/llama-omni/bin:$PATH"
 
 export SSL_CERT_FILE=~/cacert.pem
 export CUDA_DEVICE_MAX_CONNECTIONS=1
-export TORCH_NCCL_BLOCKING_WAIT=1
-export NCCL_TIMEOUT=1800
-export NCCL_IB_DISABLE=0
-export NCCL_P2P_DISABLE=0
+export USE_DEEPSPEED=0
 
 GPUS_PER_NODE=$(echo $SLURM_JOB_GPUS | tr ',' '\n' | wc -l)
 
@@ -26,4 +23,4 @@ which python
 which deepspeed
 
 cd /scratch/agarciam/tfm/models/Latxa-Omni-Emotion
-python evaluation.py --model-path saves/final --model-base Latxa-3.1-8B-Omni
+python -u evaluation.py --model-path saves/final --model-base Latxa-3.1-8B-Omni
